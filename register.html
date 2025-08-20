@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainbee Registration</title>
+  <style>
+    /* Global */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #ffefba, #ffc600);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      width: 90%;
+      max-width: 1100px;
+      background: #fff8e7;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      overflow: hidden;
+      animation: fadeIn 1s ease;
+    }
+
+    /* Left Section */
+    .left {
+      flex: 1;
+      background: linear-gradient(135deg, #ffd95a, #ffc107);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      text-align: center;
+    }
+    .left h1 {
+      font-size: 2.2rem;
+      color: #222;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+    .left p {
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    /* Right Section */
+    .right {
+      flex: 1;
+      padding: 40px;
+      background: #fff;
+    }
+    .right h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #222;
+      text-shadow: 3px 3px 5px rgba(0,0,0,0.2); /* premium shadow look */
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin: 10px 0 5px;
+      font-weight: 600;
+      color: #333;
+    }
+    input, select {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+    input:focus, select:focus {
+      border-color: #ffc107;
+      outline: none;
+      box-shadow: 0 0 8px rgba(255,193,7,0.5);
+    }
+    button {
+      padding: 12px;
+      background: #ffc107;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      color: #222;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+    button:hover {
+      background: #ffb300;
+      transform: scale(1.05);
+    }
+
+    /* Mobile Responsive */
+    @media(max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .left, .right {
+        flex: none;
+        width: 100%;
+      }
+      .left h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Side -->
+    <div class="left">
+      <h1>Welcome to Brainbee 2025</h1>
+      <p>
+        Organized by <b>Dhulikona</b> 🌟<br><br>
+        We’re excited to have you here at the Brainbee Competition!<br>
+        Show your knowledge, your passion, and your spirit.<br><br>
+        Good luck to all participants!
+      </p>
+    </div>
+
+    <!-- Right Side -->
+    <div class="right">
+      <h2>Registration</h2>
+      <form id="regForm" action="https://formspree.io/f/mzzvorzp" method="POST">
+        <!-- Generate ID -->
+        <label for="id">Generate ID</label>
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+          <input type="text" id="id" name="id" placeholder="Click generate..." readonly required>
+          <button type="button" onclick="generateId()">Generate</button>
+        </div>
+
+        <!-- Category -->
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+          <option value="">Select category</option>
+          <option value="Junior">Junior (6-8)</option>
+          <option value="Senior">Senior (9-10)</option>
+          <option value="Secondary">Secondary (11-HSC-25)</option>
+        </select>
+
+        <!-- Name -->
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <!-- Facebook -->
+        <label for="fb">Facebook Link</label>
+        <input type="url" id="fb" name="fb" placeholder="https://facebook.com/yourprofile" required>
+
+        <!-- School -->
+        <label for="school">School</label>
+        <input type="text" id="school" name="school" required>
+
+        <!-- Age -->
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" required>
+
+        <!-- Email -->
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let idGenerated = false;
+    function generateId() {
+      if (!idGenerated) {
+        const randomDigit = Math.floor(Math.random() * 10); // 0–9
+        document.getElementById("id").value = "1000" + randomDigit;
+        idGenerated = true;
+      } else {
+        alert("You can only generate your ID once!");
+      }
+    }
+
+    // Redirect to custom congrats page after successful submission
+    document.getElementById("regForm").addEventListener("submit", function() {
+      setTimeout(() => {
+        window.location.href = "congrats.html?id=" + document.getElementById("id").value;
+      }, 500);
+    });
+  </script>
+</body>
+</html>

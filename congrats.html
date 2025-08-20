@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Congratulations!</title>
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #FFFACD, #FFD700);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.card {
+    background: white;
+    padding: 45px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+    animation: zoomIn 1s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+h1 {
+    color: #FF8C00;
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, #FFA500, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px #FFA500; }
+    to { text-shadow: 0 0 20px #FFD700; }
+}
+
+p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+</style>
+</head>
+<body>
+<div class="card">
+    <h1>🎉 Congratulations! 🎉</h1>
+    <p>Your registration is successful.</p>
+    <p><strong>Your ID:</strong> <span id="userId"></span></p>
+</div>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id") || "Not generated";
+document.getElementById("userId").innerText = id;
+</script>
+</body>
+</html>
