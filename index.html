@@ -64,7 +64,7 @@
       font-size: 2rem;
       margin-bottom: 20px;
       color: #222;
-      text-shadow: 3px 3px 5px rgba(0,0,0,0.2); /* premium shadow look */
+      text-shadow: 3px 3px 5px rgba(0,0,0,0.2);
     }
     form {
       display: flex;
@@ -128,7 +128,7 @@
     <div class="left">
       <h1>Welcome to Brainbee 2025</h1>
       <p>
-        Organized by <b>Dhulikona</b> 🌟<br><br>
+        Organized by <b>Dhulikona</b> <br><br>
         We’re excited to have you here at the Brainbee Competition!<br>
         Show your knowledge, your passion, and your spirit.<br><br>
         Good luck to all participants!
@@ -181,30 +181,22 @@
   </div>
 
   <script>
-    function generateID() {
-  const prefix = "BB-"; // BrainBee short code
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let randomPart = "";
+    let idGenerated = false;
 
-  // generate 4 random chars
-  for (let i = 0; i < 4; i++) {
-    randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
+    function generateId() {
+      if (!idGenerated) {
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const numbers = "0123456789";
+        const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+        const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
+        document.getElementById("id").value = "1000" + randomLetter + randomNumber;
+        idGenerated = true;
+      } else {
+        alert("You can only generate your ID once!");
+      }
+    }
 
-  // final ID looks like BB-4X9Q
-  return prefix + randomPart;
-}
-
-// auto-fill ID field when page loads
-window.onload = () => {
-  const idField = document.getElementById("id");
-  if (idField) {
-    idField.value = generateID();
-  }
-};
-
-
-    // Redirect to custom congrats page after successful submission
+    // Redirect to custom congrats page after submission
     document.getElementById("regForm").addEventListener("submit", function() {
       setTimeout(() => {
         window.location.href = "congrats.html?id=" + document.getElementById("id").value;
@@ -213,4 +205,3 @@ window.onload = () => {
   </script>
 </body>
 </html>
-
