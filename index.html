@@ -181,16 +181,28 @@
   </div>
 
   <script>
-    let idGenerated = false;
-    function generateId() {
-      if (!idGenerated) {
-        const randomDigit = Math.floor(Math.random() * 10); // 0–9
-        document.getElementById("id").value = "1000" + randomDigit;
-        idGenerated = true;
-      } else {
-        alert("You can only generate your ID once!");
-      }
-    }
+    function generateID() {
+  const prefix = "BB-"; // BrainBee short code
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let randomPart = "";
+
+  // generate 4 random chars
+  for (let i = 0; i < 4; i++) {
+    randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  // final ID looks like BB-4X9Q
+  return prefix + randomPart;
+}
+
+// auto-fill ID field when page loads
+window.onload = () => {
+  const idField = document.getElementById("id");
+  if (idField) {
+    idField.value = generateID();
+  }
+};
+
 
     // Redirect to custom congrats page after successful submission
     document.getElementById("regForm").addEventListener("submit", function() {
@@ -201,3 +213,4 @@
   </script>
 </body>
 </html>
+
